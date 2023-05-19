@@ -4,7 +4,28 @@ const sendBox = document.getElementById("send-box")
 const sendForm = document.getElementById("send-form")
 const nameBox = document.getElementById("name-box")
 
+const loginDialog = document.getElementById("login-dialog")
+const loginForm = document.getElementById("login-form")
+const userNameInput = document.getElementById("username-input")
+const roomNameInput = document.getElementById("roomname-input")
+const loginInput = document.getElementById("login-input")
+
 const receivingWrapper = document.getElementById("messages-wrapper")
+
+loginDialog.showModal()
+
+loginForm.addEventListener("submit", e => {
+    e.preventDefault()
+
+    ws.send(JSON.stringify({
+        "login": {
+            "userName": userNameInput.value,
+            "room": roomNameInput.value
+        }
+    }))
+
+    loginDialog.close()
+})
 
 sendForm.addEventListener("submit", e => {
     let autoScroll
@@ -17,7 +38,6 @@ sendForm.addEventListener("submit", e => {
     if(sendBox.value) {
         ws.send(JSON.stringify({
             message: sendBox.value,
-            sender: nameBox.value,
             time: new Date()
         }))
 
