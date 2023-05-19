@@ -38,9 +38,9 @@ wss.on("connection", ws => {
         }
     })
 
-    //check chatrooms
+    //!TODO: remove logged of users from the system
 
-    //send data from database
+    //TODO: send last 10 messages to and from database
 
     ws.send(JSON.stringify({
         message:"Welcome to TheBaum's messaging server.",
