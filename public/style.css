@@ -14,6 +14,22 @@
     scroll-behavior: smooth;
 }
 
+dialog {
+    background-color: var(--bg_h);
+    color: var(--fg);
+    border: var(--fg) 5px solid;
+    border-radius: 1vh;
+}
+
+dialog input {
+    background-color: var(--bg);
+    color: var(--fg);
+    font-size: 1rem;
+    text-align: center;
+    border: var(--fg) 2px solid;
+    border-radius: 0.5vh;
+}
+
 body {
     background-color: var(--bg);
     color: var(--fg);
