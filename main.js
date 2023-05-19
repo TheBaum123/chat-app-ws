@@ -34,6 +34,19 @@ wss.on("connection", ws => {
                     rooms[message.login.room] = [ws]
                 }
                 console.log("registered User \"" + message.login.userName + "\" in room \"" + message.login.room + "\"")
+                ws.send(JSON.stringify({
+                    "message": `You connected to the room "${message.login.room}" as "${message.login.userName}". There are now ${rooms[message.login.room].length} user(s) connected to this room.`,
+                    "sender": "TheBaum's messaging server",
+                    "time": new Date()
+                }))
+                rooms[message.login.room].forEach(user => {
+                    if(user.OPEN && user != ws)
+                    user.send(JSON.stringify({
+                        "message": `User "${message.login.userName}" just connected. There are now ${rooms[message.login.room].length} user(s) connected to this room.`,
+                        "sender": "TheBaum's messaging server",
+                        "time": new Date()
+                    }))
+                })
             }
         }
     })
