@@ -1,0 +1,126 @@
+:root {
+    --bg: #282828;
+    --fg: #fbf1c7;
+    --bg_h: #1d2021;
+    --red-dim: #cc2412a0;
+    --red: #fb4934;
+    --bg_s: #32302f;
+    --blue: #83a598;
+    --green: #b8bb26;
+
+    font-size: 2rem;
+    font-family: 'Roboto Mono', monospace;
+
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--fg);
+}
+
+#send-form {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-content: center;
+    position: fixed;
+    bottom: 0;
+    padding: 2%;
+    width: 98%;
+    background-color: var(--bg);
+    height: 5%;
+}
+
+.received-message,
+.sent-message {
+    border-radius: 1rem;
+    width: fit-content;
+    padding: 1%;
+    margin: 1%;
+    max-width: 75%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.received-message {
+    background-color: var(--bg_s);
+    border: var(--bg_h) 2px solid;
+    align-self: flex-start;
+    animation: slide-in-left 1s ease 0s 1 normal none;
+}
+
+.sent-message {
+    background-color: var(--blue);
+    border: var(--bg_h) 2px solid;
+    align-self: flex-end;
+    animation: slide-in-right 1s ease 0s 1 normal none;
+}
+
+#messages-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    position: relative;
+    height: fit-content;
+    margin-bottom: 10%;
+    top: 0;
+    overflow-x: hidden;
+}
+
+#name-box,
+#send-box,
+#sender {
+    background-color: var(--bg_h);
+    color: var(--fg);
+    text-align: center;
+    border: var(--red-dim) 5px solid;
+    border-radius: 100vh;
+    transition: 250ms;
+    line-height: 2em;
+    width: 20%;
+    position: relative;
+}
+
+#send-box {
+    width: 50%;
+}
+
+#name-box:focus,
+#send-box:focus,
+#sender:active {
+    border: var(--red) 5px solid;
+    outline: none;
+}
+
+.sender-name {
+    font-size: 0.75em;
+    font-weight: bold;
+    color: var(--green);
+}
+
+.message-time {
+    align-self: flex-end;
+    margin: 1%;
+    font-size: 0.5em;
+}
+
+@keyframes slide-in-right {
+    from {
+        transform: translateX(150%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes slide-in-left {
+    from {
+        transform: translateX(-150%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
