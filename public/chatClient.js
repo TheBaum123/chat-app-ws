@@ -1,4 +1,4 @@
-const ws = new WebSocket("ws://localhost:3000")
+const ws = new WebSocket("ws://" + location.hostname + ":3000")
 
 const sendBox = document.getElementById("send-box")
 const sendForm = document.getElementById("send-form")
