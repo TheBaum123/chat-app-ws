@@ -26,6 +26,14 @@ if(mongoClusterName && mongoPassword && mongoUserName && mongoURLEnd) {
     messageHistoryLength = 0
 }
 
+const mongoClient = new MongoClient(mongoURI, {
+    serverApi: {
+        version: ServerApiVersion.v1,
+        strict: true,
+        deprecationErrors: true,
+    }
+})
+
 
 if(messageHistoryLength) {
     if(logging) console.log(`A message history of ${messageHistoryLength} messages will be kept on the mongodb cluster ${`mongodb+srv://${mongoUserName}:<password>@${mongoClusterName}.${mongoURLEnd}.mongodb.net/?retryWrites=true&w=majority`}`)
@@ -83,14 +91,6 @@ wss.on("connection", ws => {
             if(messageHistoryLength) {
                 let previousMessages = []
 
-                const mongoClient = new MongoClient(mongoURI, {
-                    serverApi: {
-                        version: ServerApiVersion.v1,
-                        strict: true,
-                        deprecationErrors: true,
-                    }
-                })
-
                 async function queryDatabase() {
                     try {
                         const database = mongoClient.db(mongoDataBase)
@@ -116,7 +116,7 @@ wss.on("connection", ws => {
                             "time": new Date()
                         }))
                     } finally {
-                        await mongoClient.close()
+                        if(logging) console.log("sent messages to new user")
                     }
                 }
 
@@ -186,14 +186,6 @@ server.listen(port, () => {
 
 
 async function updateDatabase(room, message) {
-    const mongoClient = new MongoClient(mongoURI, {
-        serverApi: {
-            version: ServerApiVersion.v1,
-            strict: true,
-            deprecationErrors: true,
-        }
-    })
-    
     try {
         const database = mongoClient.db(mongoDataBase)
         const col = database.collection(mongoCol)
@@ -231,9 +223,16 @@ async function updateDatabase(room, message) {
             }
         }
 
-        const result = await col.updateOne(filter, updateDoc, options)
+        await col.updateOne(filter, updateDoc, options)
 
     } finally {
-        await mongoClient.close()
+        if(logging) console.log("message saved to database")
     }
 }
+
+process.on("SIGINT", async function() {
+    if(logging) console.log("closing mongodb connection")
+    await mongoClient.close()
+    if(logging) console.log("conection to mongodb closed")
+    process.exit()
+})
