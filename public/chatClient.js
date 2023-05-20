@@ -1,5 +1,7 @@
 const ws = new WebSocket("wss://" + location.host)
 
+let firstMessage = true
+
 const sendBox = document.getElementById("send-box")
 const sendForm = document.getElementById("send-form")
 const nameBox = document.getElementById("name-box")
@@ -23,8 +25,6 @@ loginForm.addEventListener("submit", e => {
             "room": roomNameInput.value
         }
     }))
-
-    loginDialog.close()
 })
 
 sendForm.addEventListener("submit", e => {
@@ -78,7 +78,14 @@ sendForm.addEventListener("submit", e => {
 
 ws.addEventListener("message", message => {
 
-    console.log(message)
+    if(firstMessage) {
+        firstMessage = !firstMessage
+    } else {
+        loginDialog.close()
+        setTimeout(() => {
+            scrollDown()
+        }, 150);
+    }
 
     let autoScroll
 
