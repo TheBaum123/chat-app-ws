@@ -16,6 +16,10 @@ require("dotenv").config()
 
 const wss = new ws.Server({ server })
 
+app.get("/health", (req, res) => {
+    res.json({"healthy": true}).send
+})
+
 wss.on("connection", ws => {
 
     ws.on("message", (message) => {
