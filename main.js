@@ -55,9 +55,25 @@ wss.on("connection", ws => {
         }
     })
 
-    //!TODO: remove logged of users from the system
+    ws.on("close", () => {
+        const usersIndex = users.findIndex(e => e.ws === ws);
+        const roomLeft = users[usersIndex].room
+        const leavingUserName = users[usersIndex].userName
+        const indexInRooms = rooms[roomLeft].findIndex(wsElem => wsElem == ws)
+        rooms[roomLeft].splice(indexInRooms, 1)
+        users.splice(usersIndex, 1)
+        let brodcastMessage = ("User \"" + leavingUserName + "\" just left. There are now " + rooms[roomLeft].length + " user(s) connected to this room.")
+        rooms[roomLeft].forEach(user => {
+            user.send(JSON.stringify({
+                "message": brodcastMessage,
+                "sender": "TheBaum's messaging server",
+                "time": new Date()
+            }))
+        })
+        console.log(`removed User "${leavingUserName}" from room "${roomLeft}"`)
+    })
 
-    //TODO: send last 10 messages to and from database
+    //TODO: send and load last 10 messages to and from database
 
     ws.send(JSON.stringify({
         message:"Welcome to TheBaum's messaging server.",
