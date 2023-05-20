@@ -225,8 +225,9 @@ async function updateDatabase(room, message) {
 
         await col.updateOne(filter, updateDoc, options)
 
-    } finally {
-        if(logging) console.log("message saved to database")
+    }
+    finally {
+        
     }
 }
 
