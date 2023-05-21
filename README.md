@@ -16,6 +16,7 @@ There is no encryption in place. Please dont communicate sensitive information o
         - [With mongodb and persistent messages in node.js](#with-mongodb-and-persistent-messages-in-nodejs)
     - [The values of the enviroment variables](#the-values-of-the-enviroment-variables)
     - [[IMPORTANT] - about ssl certificates](#important---about-ssl-certificates)
+        - [Quick Fix](#quick-fix)
 ---
 
 ### Demo:
@@ -26,6 +27,7 @@ The message length is limited to 2500 characters for speed reasons. The username
 If you want to selfhost this app, you can do so in a docker container, or on any nodejs server.
 
 #### Using Docker:
+Notice: when hosting in a docker container you need a sll certificat. For more information see [this](#important---about-ssl-certificates).
 ##### Without mongodb and persistent messages in docker:
 ```sh
 docker run -p <port>:3000 \
@@ -51,6 +53,8 @@ docker run -p <port>:3000 \
 Replace `<container-name>` with the name you want the container to have.
 
 #### Using a node.js server:
+Troubleshooting: If you can get to the login screen, but cant log in, you are most likeley missing an ssl certificate. For a quick fix see [this quick fix](#quick-fix).
+
 If you want to selfhost this on a nodejs server you can do so by running the commands:
 ##### Without mongodb and persistent messages in node.js:
 ```sh
@@ -111,4 +115,5 @@ If you are missing any of these informations, you can (if you are using mongodb 
 # [Important] - about ssl certificates
 When using the server as is, you will need a ssl certificat, since the websocket connects over the `wss://` protocol.
 
+## Quick Fix
 Currently the only way arround this, is to host on a node.js server and change the first line in `/public/chatClient.js` from `const ws = new WebSocket("wss://" + location.host)` to `const ws = new WebSocket("ws://" + location.host)`
