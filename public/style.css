@@ -8,7 +8,7 @@
     --blue: #83a598;
     --green: #b8bb26;
 
-    font-size: 2rem;
+    font-size: clamp(1rem, 5vh, 2rem);
     font-family: 'Roboto Mono', monospace;
 
     scroll-behavior: smooth;
@@ -45,7 +45,7 @@ body {
     padding: 2%;
     width: 98%;
     background-color: var(--bg);
-    height: 5%;
+    height: clamp(50px, 10%, 100px);
 }
 
 .received-message,
@@ -88,7 +88,6 @@ body {
     overflow-x: hidden;
 }
 
-#name-box,
 #send-box,
 #sender {
     background-color: var(--bg_h);
@@ -98,15 +97,19 @@ body {
     border-radius: 100vh;
     transition: 250ms;
     line-height: 2em;
-    width: 20%;
     position: relative;
 }
 
-#send-box {
-    width: 50%;
+#sender {
+    aspect-ratio: 1/1;
+    font-size: 1rem;
 }
 
-#name-box:focus,
+#send-box {
+    width: 70%;
+    font-size: clamp(1rem, 5vh, 2rem);
+}
+
 #send-box:focus,
 #sender:active {
     border: var(--red) 5px solid;
@@ -140,5 +143,22 @@ body {
     }
     to {
         transform: translateX(0);
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    #login-form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    #login-form>* {
+        margin: 2%;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    #messages-wrapper>* {
+        border-radius: 0.5rem;
     }
 }
