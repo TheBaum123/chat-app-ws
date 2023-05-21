@@ -58,6 +58,7 @@ body {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
+    word-break: break-all;
 }
 
 .received-message {
@@ -65,6 +66,7 @@ body {
     border: var(--bg_h) 2px solid;
     align-self: flex-start;
     animation: slide-in-left 1s ease 0s 1 normal none;
+    word-break: break-all;
 }
 
 .sent-message {
