@@ -40,6 +40,7 @@ If you want to selfhost this on a nodejs server you can do so by running the com
 ```sh
 git clone https://github.com/TheBaum123/chat-app-ws.git ./chat-app
 cd ./chat-app
+npm i
 node .
 ```
 ##### With mongodb and persistent messages:
