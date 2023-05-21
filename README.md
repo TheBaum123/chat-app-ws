@@ -2,6 +2,21 @@
 This is a chat app made by me, to see what i can make in 4 days.
 ### DISCLAIMER:
 There is no encryption in place. Please dont communicate sensitive information over this chat.
+
+## Table of contents
+- [Demo](#demo)
+- [Limitations](#limitations)
+- [How to: selfhost](#how-to-selfhost)
+    - [Using Docker](#using-docker)
+        - [Without mongodb and persistent messages in docker](#without-mongodb-and-persistent-messages-in-docker)
+        - [With mongodb and persistent messages in docker](#with-mongodb-and-persistent-messages-in-docker)
+        - [With and without mongodb and persistent messages in docker](#with-and-without-mongodb-ans-persistent-messages-in-docker)
+    - [Using a node.js server](#using-a-nodejs-server)
+        - [Without mongodb and persistent messages in node.js](#without-mongodb-and-persistent-messages-in-nodejs)
+        - [With mongodb and persistent messages in node.js](#with-mongodb-and-persistent-messages-in-nodejs)
+    - [The values of the enviroment variables](#the-values-of-the-enviroment-variables)
+---
+
 ### Demo:
 A publicly hosted version of this chat app can be accessed and tested [here](https://chat-app-6bnk.onrender.com/). Note, that anything you send there is kept in my database and can be seen by me and I can see your ip address upon you connecting. Your ip address is not visible for anyone else appart from me.
 ### Limitations:
@@ -10,14 +25,14 @@ The message length is limited to 2500 characters for speed reasons. The username
 If you want to selfhost this app, you can do so in a docker container, or on any nodejs server.
 
 #### Using Docker:
-##### Without mongodb and persistent messages:
+##### Without mongodb and persistent messages in docker:
 ```sh
 docker run -p <port>:3000 \
 -e LOGGING=true \
 --name <container-name>
 ```
-
-##### With mongodb and persistent messages:
+[Click here](#the-values-of-the-enviroment-variables) to see what to replace the values in the "<>" with.
+##### With mongodb and persistent messages in docker:
 ```sh
 docker run -p <port>:3000 \
 -e MONGODBUSERNAME=<mongodb-user-name> \
@@ -30,20 +45,20 @@ docker run -p <port>:3000 \
 -e LOGGING=true \
 --name <container-name>
 ```
-
-#### In both cases:
+[Click here](#the-values-of-the-enviroment-variables) to see what to replace the values in the "<>" with.
+#### With and without mongodb ans persistent messages in docker:
 Replace `<container-name>` with the name you want the container to have.
 
-#### Using a nodejs server:
+#### Using a node.js server:
 If you want to selfhost this on a nodejs server you can do so by running the commands:
-##### Without mongodb and persistent messages:
+##### Without mongodb and persistent messages in node.js:
 ```sh
 git clone https://github.com/TheBaum123/chat-app-ws.git ./chat-app
 cd ./chat-app
 npm i
 node .
 ```
-##### With mongodb and persistent messages:
+##### With mongodb and persistent messages in node.js:
 Run the commands:
 ```sh
 git clone https://github.com/TheBaum123/chat-app-ws.git ./chat-app
@@ -62,11 +77,13 @@ HISTORYCOL=<mongodb-collection-name>
 HISTORYLENGTH=<mongodb-history-length>
 LOGGING=true
 ```
+[Click here](#the-values-of-the-enviroment-variables) to see what to replace the values in the "<>" with.
+
 Now go back to your terminal session in the chat-app directory and run:
 ```sh
 node .
 ```
-#### No matter if you are using a nodejs or a docker server:
+#### The values of the enviroment variables
 
 If you dont want any logging to the console, **dont** set the `LOGGING` enviroment variable at all.
 
