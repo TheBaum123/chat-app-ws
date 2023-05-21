@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY ./main.js ./main.js
 COPY ./package.json ./package.json
-COPY ./package-lock.json ./package-lock.json
+COPY ./pnpm-lock.yaml ./pnpm-lock.yaml
 COPY ./public ./public
 
 RUN npm i
