@@ -22,7 +22,7 @@ There is no encryption in place. Please dont communicate sensitive information o
 ### Demo:
 A publicly hosted version of this chat app can be accessed and tested [here](https://chat-app-6bnk.onrender.com/). Note, that anything you send there is kept in my database and can be seen by me and I can see your ip address upon you connecting. Your ip address is not visible for anyone else appart from me.
 ### Limitations:
-The message length is limited to 2500 characters for speed reasons. The username and room names have a maximum lenghth of 100 characters each.
+The message length is limited to 2500 characters for speed reasons. The username and room names have a maximum lenghth of 100 characters each. The app isn't compatible with internet explorer and apple watch.
 ### How to: selfhost
 If you want to selfhost this app, you can do so in a docker container, or on any nodejs server.
 
