@@ -15,14 +15,14 @@
     <dialog id="login-dialog">
         <form id="login-form">
             <label for="username-input">User Name:</label>
-            <input type="name" id="username-input" required>
+            <input maxlength="100" type="name" id="username-input" required>
             <label for="roomname-input">Room:</label>
-            <input type="text" id="roomname-input" required>
+            <input maxlength="100" type="text" id="roomname-input" required>
             <input type="submit" id="login-input" value="login">
         </form>
     </dialog>
     <form action="" id="send-form">
-        <input type="text" name="" id="send-box">
+        <input maxlength="2500" type="text" name="" id="send-box">
         <input type="submit" id="sender">
     </form>
     <script src="chatClient.js"></script>
