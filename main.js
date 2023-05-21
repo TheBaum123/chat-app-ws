@@ -26,13 +26,17 @@ if(mongoClusterName && mongoPassword && mongoUserName && mongoURLEnd) {
     messageHistoryLength = 0
 }
 
-const mongoClient = new MongoClient(mongoURI, {
-    serverApi: {
-        version: ServerApiVersion.v1,
-        strict: true,
-        deprecationErrors: true,
-    }
-})
+let mongoClient
+
+if(mongoURI) {
+    mongoClient = new MongoClient(mongoURI, {
+        serverApi: {
+            version: ServerApiVersion.v1,
+            strict: true,
+            deprecationErrors: true,
+        }
+    })
+}
 
 
 if(messageHistoryLength) {
@@ -181,7 +185,7 @@ app.use(express.static("public"))
 
 
 server.listen(port, () => {
-    console.log("listening on port " + port)
+    if(logging) console.log("listening on port " + port)
 })
 
 
