@@ -81,7 +81,7 @@ wss.on("connection", ws => {
                 } else {
                     rooms[message.login.room] = [ws]
                 }
-                if(logging) console.log(`registered User "${message.login.userName}" in room "${message.login.room}" with the ip ${ws._socket.remoteAddress}`)
+                if(logging) console.log(`registered User "${message.login.userName}" in room "${message.login.room}"`)
                 rooms[message.login.room].forEach(user => {
                     if(user.OPEN && user != ws)
                     user.send(JSON.stringify({
