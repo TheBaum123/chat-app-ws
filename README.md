@@ -15,6 +15,7 @@ There is no encryption in place. Please dont communicate sensitive information o
         - [Without mongodb and persistent messages in node.js](#without-mongodb-and-persistent-messages-in-nodejs)
         - [With mongodb and persistent messages in node.js](#with-mongodb-and-persistent-messages-in-nodejs)
     - [The values of the enviroment variables](#the-values-of-the-enviroment-variables)
+    - [[IMPORTANT] - about ssl certificates](#important---about-ssl-certificates)
 ---
 
 ### Demo:
@@ -105,3 +106,9 @@ Replace `<container-name>` with the name you want the container to have.
 
 If you are missing any of these informations, you can (if you are using mongodb cloud) go to your database deployments and click on any connect, then click on any of the options (for example Drivers) and  find the information in the connection string under step three. The information is formatted in the connection string as follows:
 `mongodb+srv://<mongodb-user-name>:<mongodb-password>@<mongodb-cluster-name>.<mongodb-url-end>.mongodb.net/?retryWrites=true&w=majority`
+
+---
+# [Important] - about ssl certificates
+When using the server as is, you will need a ssl certificat, since the websocket connects over the `wss://` protocol.
+
+Currently the only way arround this, is to host on a node.js server and change the first line in `/public/chatClient.js` from `const ws = new WebSocket("wss://" + location.host)` to `const ws = new WebSocket("ws://" + location.host)`
