@@ -20,7 +20,7 @@ There is no encryption in place. Please dont communicate sensitive information o
 ---
 
 ### Demo:
-A publicly hosted version of this chat app can be accessed and tested [here](https://chat-app-6bnk.onrender.com/). Note, that anything you send there is kept in my database and can be seen by me.
+A publicly hosted version of this chat app can be accessed and tested [here](https://chat-app-6bnk.onrender.com/) (might take about 15-30 seconds to start up before loading). Note, that anything you send there is kept in my database and can be seen by me.
 ### Limitations:
 The message length is limited to 2500 characters for speed reasons. The username and room names have a maximum lenghth of 100 characters each. The app isn't compatible with internet explorer and apple watch.
 ### How to: selfhost
