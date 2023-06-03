@@ -2,14 +2,19 @@ const ws = require("ws")
 const http = require("http")
 const express = require("express")
 const {MongoClient, ServerApiVersion} = require("mongodb")
+const clui = require("clui")
 
 require("dotenv").config()
 
 const port = process.env.PORT || 3000
-const logging = process.env.LOGGING
+const logging = JSON.parse(process.env.LOGGING)
 
 let users = []
 let rooms = {}
+
+const spinner = new clui.Spinner("Loading env variables...")
+
+if(logging) spinner.start()
 
 const mongoUserName = process.env.MONGODBUSERNAME
 const mongoPassword = process.env.MONGODBPASSWORD
@@ -25,6 +30,8 @@ if(mongoClusterName && mongoPassword && mongoUserName && mongoURLEnd) {
 } else {
     messageHistoryLength = 0
 }
+
+spinner.message("Setting up mongodb...")
 
 let mongoClient
 
@@ -43,15 +50,15 @@ if(messageHistoryLength) {
     if(logging) console.log(`A message history of ${messageHistoryLength} messages will be kept on the mongodb cluster ${`mongodb+srv://${mongoUserName}:<password>@${mongoClusterName}.${mongoURLEnd}.mongodb.net/?retryWrites=true&w=majority`}`)
     if(logging) console.log(`Messages will be kept in the database "${mongoDataBase}" under the collection "${mongoCol}"`)
     if(mongoPassword) {
-        console.log("a password is present, but wont be logged for obvious security reasons.")
+        if(logging) console.log("a password is present, but wont be logged for obvious security reasons.")
     } else {
         console.log("YOU FORGOT SETTING THE \"MONGODBPASSWORD\" ENVIROMENT VARIABLE.")
     }
 } else {
-    if(logging) {
-        console.log("tip: did you know you can use this app connected to a mongodb databese for message persistence?")
-    }
+    if(logging) console.log("tip: did you know you can use this app connected to a mongodb databese for message persistence?")
 }
+
+spinner.message("creating server...")
 
 const app = express()
 
@@ -181,11 +188,17 @@ wss.on("connection", ws => {
 })
 
 
+spinner.message("setting up frontend...")
+
 app.use(express.static("public"))
 
 
 server.listen(port, () => {
     if(logging) console.log("listening on port " + port)
+    spinner.message(`listening on port ${port}`)
+    setTimeout(() => {
+        if(logging) spinner.stop()
+    }, 1000);
 })
 
 
