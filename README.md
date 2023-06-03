@@ -90,7 +90,7 @@ node .
 ```
 #### The values of the enviroment variables
 
-If you dont want any logging to the console, **dont** set the `LOGGING` enviroment variable at all.
+Set `logging=true` if you want logging in the console.
 
 Replace `<cmongodb-user-name>` with the username you want to use to log into mongodb.
 
