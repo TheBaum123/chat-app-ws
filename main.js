@@ -55,7 +55,7 @@ if(messageHistoryLength) {
         console.log("YOU FORGOT SETTING THE \"MONGODBPASSWORD\" ENVIROMENT VARIABLE.")
     }
 } else {
-    if(logging) console.log("tip: did you know you can use this app connected to a mongodb databese for message persistence?")
+    if(logging) console.log("tip: did you know you can use this app connected to a mongodb database for message persistence?")
 }
 
 spinner.message("creating server...")
@@ -123,6 +123,11 @@ wss.on("connection", ws => {
                         
                         ws.send(JSON.stringify({
                             "message": `You connected to the room "${message.login.room}" as "${message.login.userName}". There are now ${rooms[message.login.room].length} user(s) connected to this room.`,
+                            "sender": "TheBaum's messaging server",
+                            "time": new Date()
+                        }))
+                        ws.send(JSON.stringify({
+                            "message": `Did you know you can host your own instance of this chat server? For more info visit https://github.com/TheBaum123/chat-app-ws`,
                             "sender": "TheBaum's messaging server",
                             "time": new Date()
                         }))
