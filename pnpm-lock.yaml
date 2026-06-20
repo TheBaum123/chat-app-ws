@@ -19,7 +19,7 @@ dependencies:
     version: 6.7.0
   ws:
     specifier: ^8.13.0
-    version: 8.17.0
+    version: 8.21.0
 
 packages:
 
@@ -726,8 +726,8 @@ packages:
       webidl-conversions: 7.0.0
     dev: false
 
-  /ws@8.17.0:
-    resolution: {integrity: sha512-uJq6108EgZMAl20KagGkzCKfMEjxmKvZHG7Tlq0Z6nOky7YF7aq4mOx6xK8TJ/i1LeK4Qus7INktacctDgY8Ow==}
+  /ws@8.21.0:
+    resolution: {integrity: sha512-Vsp28b7DRcimFQvrqu2Wek3z1iYxDCWqHYB8Qsnk/S4RfaCQzPGPyBNuVjJV3cd6UiKtUtp6sNM77gWvzcCH+g==}
     engines: {node: '>=10.0.0'}
     peerDependencies:
       bufferutil: ^4.0.1
